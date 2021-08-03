@@ -1,0 +1,48 @@
+version: "3.5"
+services:
+
+  directus:
+    image: directus/directus:v9.0.0-rc.69
+    restart: unless-stopped
+    networks:
+        - db_network
+        - external_network
+    ports:
+      - "172.17.0.1:${DIRECTUS_API_LISTEN}:8055"
+    environment:
+      PUBLIC_URL: "${DIRECTUS_PUBLIC_URL}"
+      KEY: "${DIRECTUS_KEY}"
+      SECRET: "${DIRECTUS_SECRET}"
+      DB_CLIENT: 'pg'
+      DB_HOST: "${DIRECTUS_DATABASE_HOST}"
+      DB_PORT: "${DIRECTUS_DATABASE_PORT}"
+      DB_DATABASE: "${DIRECTUS_DATABASE_NAME}"
+      DB_USER: "${DIRECTUS_DATABASE_USERNAME}"
+      DB_PASSWORD: "${DIRECTUS_DATABASE_PASSWORD}"
+      EMAIL_FROM: "${SMTP_FROM}"
+      EMAIL_TRANSPORT: 'smtp'
+      EMAIL_SMTP_HOST: "${SMTP_HOST}"
+      EMAIL_SMTP_PORT: '465'
+      EMAIL_SMTP_USER: "${SMTP_USER}"
+      EMAIL_SMTP_PASSWORD: "${SMTP_PASSWORD}"
+      EMAIL_SMTP_SECURE: 'true'
+
+  quiz_api:
+    image: azminas/quiz_api
+    restart: unless-stopped
+    ports:
+      - "172.17.0.1:${QUIZ_API_LISTEN}:8080"
+    environment:
+      REDIS_SERVER: "${REDIS_SERVER}"
+      REDIS_NS: "${REDIS_NS}"
+    volumes:
+        - ../data/:/data/
+        - ./api/:/src/
+    networks:
+        - external_network
+        - db_network
+
+networks:
+    external_network:
+    db_network:
+        name: penhas_db_pg_network
