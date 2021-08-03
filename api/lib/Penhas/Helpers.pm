@@ -21,8 +21,8 @@ sub setup {
     Penhas::Helpers::GeolocationCached::setup($c);
 
     state $kv = Penhas::KeyValueStorage->instance;
-    $c->helper(kv                    => sub {$kv});
-    $c->helper(schema                => \&Penhas::SchemaConnected::get_schema);
+    $c->helper(kv     => sub {$kv});
+    $c->helper(schema => \&Penhas::SchemaConnected::get_schema);
 
     $c->helper('reply.exception' => sub { Penhas::Controller::reply_exception(@_) });
     $c->helper('reply.not_found' => sub { Penhas::Controller::reply_not_found(@_) });
@@ -44,17 +44,7 @@ sub respond_to_if_web {
                 goto JSON;
             }
             else {
-                my (%keys) = @_;
-                my $html = $keys{html};
-                if (defined $html && ref $html eq 'HASH') {
-                    $c->log->debug("saving to flash " . to_json($html));
-
-                    $html->{params} = $c->req->params->to_hash;
-
-                    $c->flash_to_redis($html);
-
-                    return $c->redirect_to($ref_header);
-                }
+                die 'not implemented web on this version';
             }
         }
 

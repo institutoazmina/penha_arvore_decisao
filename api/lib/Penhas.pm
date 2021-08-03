@@ -7,7 +7,6 @@ use Penhas::Routes;
 use Penhas::Logger;
 use Penhas::Utils;
 use Penhas::SchemaConnected;
-use Penhas::Authentication;
 
 sub startup {
     my $self = shift;
