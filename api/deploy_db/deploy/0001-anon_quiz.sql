@@ -1,4 +1,6 @@
 
+create extension if not exists "uuid-ossp";
+
 BEGIN;
 
 --
@@ -310,7 +312,7 @@ ALTER TABLE ONLY public.quiz_config ALTER COLUMN id SET DEFAULT nextval('public.
 -- Data for Name: penhas_config; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.penhas_config VALUES (1, 'ANON_QUIZ_SECRET', 'd537d500-2f17-4099-a47c-f10ccb22896c', '2021-08-03 17:52:28.383229', 'infinity');
+INSERT INTO public.penhas_config VALUES (1, 'ANON_QUIZ_SECRET', uuid_generate_v4(), '2021-08-03 17:52:28.383229', 'infinity');
 
 
 --
