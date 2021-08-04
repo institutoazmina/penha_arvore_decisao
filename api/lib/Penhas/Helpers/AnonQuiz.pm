@@ -16,7 +16,21 @@ sub setup {
     $self->helper('anon_new_quiz_session'  => sub { &anon_new_quiz_session(@_) });
     $self->helper('anon_load_quiz_session' => sub { &anon_load_quiz_session(@_) });
     $self->helper('anon_ponto_apoio_json'  => sub { &anon_ponto_apoio_json(@_) });
+    $self->helper('ponto_apoio_list'  => sub { &ponto_apoio_list(@_) });
+}
 
+sub ponto_apoio_list {
+    my ($c, %opts) = @_;
+
+
+    if (is_test()){
+        use DDP; p $c;
+        my $json = $c->app->home->child('t','data', 'mock-ponto-apoio.json')->slurp;
+
+        return from_json($json);
+    }else{
+
+    }
 }
 
 sub anon_ponto_apoio_json {
@@ -31,8 +45,8 @@ sub anon_ponto_apoio_json {
 
         max_distance => 50,
         rows         => 3,
-        all_columns  => 1,
     );
+
     my $success = scalar @{$pontos_apoios->{rows}};
     my $ret     = [];
 

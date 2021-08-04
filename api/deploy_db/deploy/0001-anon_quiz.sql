@@ -468,6 +468,13 @@ ALTER TABLE ONLY public.twitter_bot_config ALTER COLUMN id SET DEFAULT nextval('
 ALTER TABLE ONLY public.twitter_bot_config
     ADD CONSTRAINT twitter_bot_config_pkey PRIMARY KEY (id);
 
+INSERT INTO "geo_cache"( "created_at", "key", "valid_until", "value" )
+  VALUES( NOW(  ), '03610020', NOW(  ) + INTERVAL '2592000 seconds', '-23.51931,-46.53917' );
+
+INSERT INTO "geo_cache"( "created_at", "key", "valid_until", "value" )
+   VALUES( NOW(  ), '-23.51934,-46.53918', NOW(  ) + INTERVAL '2592000 seconds', 'Penha, São Paulo, SP, Brasil' );
+
+INSERT INTO public.penhas_config VALUES (DEFAULT, 'PONTO_APOIO_SECRET', uuid_generate_v4(), '2021-08-03 17:52:28.383229', 'infinity');
 
 insert into public.twitter_bot_config(config) values ('{}');
 
