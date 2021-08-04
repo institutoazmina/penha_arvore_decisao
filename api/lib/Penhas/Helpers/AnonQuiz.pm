@@ -16,21 +16,23 @@ sub setup {
     $self->helper('anon_new_quiz_session'  => sub { &anon_new_quiz_session(@_) });
     $self->helper('anon_load_quiz_session' => sub { &anon_load_quiz_session(@_) });
     $self->helper('anon_ponto_apoio_json'  => sub { &anon_ponto_apoio_json(@_) });
-    $self->helper('ponto_apoio_list'  => sub { &ponto_apoio_list(@_) });
+    $self->helper('ponto_apoio_list'       => sub { &ponto_apoio_list(@_) });
 }
 
 sub ponto_apoio_list {
     my ($c, %opts) = @_;
 
-
-    if (is_test()){
-        use DDP; p $c;
-        my $json = $c->app->home->child('t','data', 'mock-ponto-apoio.json')->slurp;
-
+    if (is_test()) {
+        my $json = $c->app->home->child('t', 'data', 'mock-ponto-apoio.json')->slurp;
         return from_json($json);
-    }else{
-
     }
+    die 'missing $ENV{PONTO_APOIO_ENDPOINT}' unless $ENV{PONTO_APOIO_ENDPOINT};
+
+    my $res = $c->ua->get($ENV{PONTO_APOIO_ENDPOINT}, form => \%opts)->result;
+    if ($res->code != 200) {
+        die 'Failed to get ponto_apoio: ' . $res->to_string;
+    }
+    return $res->json;
 }
 
 sub anon_ponto_apoio_json {
