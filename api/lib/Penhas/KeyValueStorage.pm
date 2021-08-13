@@ -18,6 +18,7 @@ sub _build_redis {
     $ENV{REDIS_NS} ||= '';
     Redis->new(
         reconnect => 5,
+        password => $ENV{REDIS_PASSWORD} || '',
         every     => 10_000,                                  # 10ms
         server    => $ENV{REDIS_SERVER} || '127.0.0.1:6379'
     );
