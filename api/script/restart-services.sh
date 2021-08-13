@@ -12,6 +12,8 @@ export PENHAS_API_LOG_DIR=/data/log/
 export SQITCH_DEPLOY=${SQITCH_DEPLOY:=docker}
 
 cpanm -nv . --installdeps
+
+sqitch config --replace-all target.docker.uri db:pg://$POSTGRESQL_USER:$POSTGRESQL_PASSWORD@$POSTGRESQL_HOST:$POSTGRESQL_PORT/$POSTGRESQL_DBNAME
 sqitch deploy -t $SQITCH_DEPLOY
 
 export RESTART_TYPE='all'

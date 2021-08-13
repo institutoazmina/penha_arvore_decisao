@@ -15,6 +15,7 @@ fi
 export SQITCH_DEPLOY=${SQITCH_DEPLOY:=docker}
 
 cpanm -nv . --installdeps
+sqitch config --replace-all target.docker.uri db:pg://$POSTGRESQL_USER:$POSTGRESQL_PASSWORD@$POSTGRESQL_HOST:$POSTGRESQL_PORT/$POSTGRESQL_DBNAME
 sqitch deploy -t $SQITCH_DEPLOY
 
 LIBEV_FLAGS=4 APP_NAME=API MOJO_IOLOOP_DEBUG=1 hypnotoad script/quiz-api
