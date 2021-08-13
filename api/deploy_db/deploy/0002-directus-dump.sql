@@ -689,7 +689,7 @@ INSERT INTO public.directus_settings (id, project_name, project_url, project_col
 -- Data for Name: directus_users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.directus_users (id, first_name, last_name, email, password, location, title, description, tags, avatar, language, theme, tfa_secret, status, role, token, last_access, last_page) VALUES ('8bc23069-7341-4c75-9c35-e1ab182ea526', NULL, NULL, 'admin@example.com', '$argon2i$v=19$m=4096,t=3,p=1$RvmdEif7yD61laJK9vN3sw$cewa2gUuwnqCwe1O6RryjOg/oWO2sY0Jm2P9jsGy2ak', NULL, NULL, NULL, NULL, NULL, 'pt-BR', 'auto', NULL, 'active', 'a843b72e-2d1f-4859-992b-891e0fa6589f', NULL, '2021-08-04 15:44:12.326-03', '/settings/data-model/quiz_config');
+INSERT INTO public.directus_users (id, first_name, last_name, email, password, location, title, description, tags, avatar, language, theme, tfa_secret, status, role, token, last_access, last_page) VALUES ('8bc23069-7341-4c75-9c35-e1ab182ea526', NULL, NULL, 'admin@example.com', '$argon2i$v=19$m=4096,t=3,p=1$ouvWXEDPDogqDyOO/ir1dQ$LBS6JETkOHpf285J8KF1YNXef6VW8YJngCDTzmF/v1g', NULL, NULL, NULL, NULL, NULL, 'pt-BR', 'auto', NULL, 'active', 'a843b72e-2d1f-4859-992b-891e0fa6589f', NULL, '2021-08-04 15:44:12.326-03', '/settings/data-model/quiz_config');
 
 
 --
