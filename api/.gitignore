@@ -85,3 +85,5 @@ docker/crontab
 
 # LibreOffice lockfiles
 .~lock.*.*#
+
+sqitch.conf
